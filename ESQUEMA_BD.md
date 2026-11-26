@@ -168,7 +168,7 @@ Cada uno hace las tablas y los endpoints de su HU.
 |---|---|---|
 | HU-1 | sedes, usuarios, tokens_recuperacion | POST /usuarios/login, POST /usuarios (registro), PUT /usuarios (perfil y contraseña), recuperación |
 | HU-2 | espacios, equipamientos, horarios_atencion | CRUD /espacios con include de equipamiento y horario, cambio de estado |
-| HU-3 | (lee espacios, reservas y bloqueos) | GET /espacios/buscar, GET /espacios/:id/disponibilidad?semana= |
+| HU-3 | (lee espacios, bloques_horarios, reservas y bloqueos; no escribe) | /disponibilidad (opciones, búsqueda, semana y similares). Ver la tabla de endpoints de README.md |
 | HU-4 | bloques_horarios, reservas, invitados, eventos_reserva | POST /reservas (con invitados, en transacción), GET /reservas/usuario/:id, GET /reservas/codigo/:codigo, cancelar |
 | HU-5 | bloqueos, bloqueo_bloques (+ columnas de llegada y cancelación en reservas) | /bloqueos (listar, preview, crear, eliminar) y /operacion (bandeja, llegada, inasistencia, cancelar, búsqueda). Ver la tabla de endpoints de README.md |
 | HU-6 | incidencias, comentarios_incidencia | POST /incidencias, GET /incidencias/usuario/:id, GET /incidencias, POST comentario, PUT estado |
