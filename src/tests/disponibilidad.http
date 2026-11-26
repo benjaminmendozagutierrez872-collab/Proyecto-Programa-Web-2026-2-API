@@ -1,0 +1,37 @@
+### HU-3 · Pruebas de disponibilidad y búsqueda (extensión REST Client)
+# Antes: npm run semilla y npm run dev.
+# Estudiante Ana = 1 (para ver "Mi reserva" en el calendario). Espacio 1 = Laboratorio H-304.
+# Todo es GET: la disponibilidad se calcula con espacios, reservas y bloqueos; no se guarda.
+
+@url = http://localhost:3005/disponibilidad
+@hoy = {{$localDatetime 'YYYY-MM-DD'}}
+
+### 1. Opciones del panel de filtros → sedes, tipos, equipamiento y órdenes
+GET {{url}}/opciones
+
+### 2. Búsqueda sin filtros → { resultados, total, fecha } (solo espacios con algún bloque libre hoy)
+GET {{url}}/espacios
+
+### 3. Filtros: dos tipos, aforo mínimo y orden por aforo
+GET {{url}}/espacios?tipo=laboratorio&tipo=sala&aforo=10&orden=aforo
+
+### 4. Equipamiento y franja horaria de la tarde
+GET {{url}}/espacios?equipo=Proyector&desde=14:00&hasta=18:00&dia={{hoy}}
+
+### 5. Filtros inválidos → 400 VALIDACION con un mensaje por campo
+GET {{url}}/espacios?aforo=-1&tipo=piscina&desde=18:00&hasta=08:00
+
+### 6. Calendario de la semana del espacio 1, visto por Ana → celdas libre / ocupado / propia / no_disponible
+GET {{url}}/espacios/1/semana?semana={{hoy}}&usuarioId=1
+
+### 7. Mismo calendario como visitante (sin usuarioId) y solo de 12:00 a 16:00
+GET {{url}}/espacios/1/semana?semana={{hoy}}&desde=12:00&hasta=16:00
+
+### 8. Espacio que no existe → 404 NO_ENCONTRADO
+GET {{url}}/espacios/999/semana
+
+### 9. Espacios similares al 1 con bloques libres esa semana (máximo 3)
+GET {{url}}/espacios/1/similares?semana={{hoy}}&limite=3
+
+### 10. Límite fuera de rango → 400
+GET {{url}}/espacios/1/similares?limite=50

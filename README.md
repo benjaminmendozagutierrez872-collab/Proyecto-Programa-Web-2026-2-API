@@ -48,6 +48,10 @@ Cada HU agrega aquí los suyos. Las pruebas de cada HU van en su propio archivo 
 
 | HU | Método y ruta | Qué hace |
 |---|---|---|
+| HU-3 | `GET /disponibilidad/opciones` | Valores del panel de filtros: sedes, tipos, equipamiento y órdenes |
+| HU-3 | `GET /disponibilidad/espacios?sedeId&tipo&aforo&equipo&dia&desde&hasta&orden&usuarioId` | Búsqueda: espacios con al menos un bloque libre ese día y en esa franja (`tipo` y `equipo` se pueden repetir) |
+| HU-3 | `GET /disponibilidad/espacios/:id/semana?semana&desde&hasta&usuarioId` | Calendario de lunes a sábado: estado de cada bloque (libre, ocupado, propia, no disponible) y resumen |
+| HU-3 | `GET /disponibilidad/espacios/:id/similares?semana&desde&hasta&limite` | Espacios parecidos con bloques libres esa semana (para los mockups 3.5 y 3.6) |
 | HU-5 | `GET /bloqueos?sedeId=1` | Bloqueos vigentes (terminan hoy o después), con espacio, bloques y reservas canceladas |
 | HU-5 | `GET /bloqueos/preview?espacioId&desde&hasta&bloqueIds=4,5` | Reservas confirmadas que el bloqueo cancelaría |
 | HU-5 | `GET /bloqueos/:id` | Un bloqueo |
